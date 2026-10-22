@@ -22,7 +22,8 @@ You can also open `index.html` directly. The site uses Google Fonts when availab
 - Four expandable Delta rotations, education, leadership, teaching, skills, and 29 travel destinations.
 - EN/ES switching with a remembered preference and Spanish browser-language detection.
 - Responsive navigation, active section indicators, email copy feedback, and reduced-motion support.
-- Core content and project disclosures remain available without JavaScript.
+- Core content and project disclosures remain available without JavaScript; phones then get plain header links instead of the menu button.
+- The header stops sticking on viewports 480 px tall or less (landscape phones, high zoom).
 
 ## Files and editing
 
@@ -50,6 +51,7 @@ The original three source files and original share image are preserved in `.prev
 - Responsive inspection at desktop, tablet, and narrow phone widths, including 320px in both languages.
 - Local asset, anchor-target, duplicate-ID, and source-content checks.
 - No application console warnings or errors in the tested browser session.
+- Cross-browser accessibility pass (2026-10-22) in headless Chrome 155, Edge 155, and Firefox 158. It covered axe-core 4.10.2 in both languages with zero violations, keyboard walkthroughs, reduced motion, JavaScript disabled, and reflow at 200% and 400% zoom. Results and the checks still needing a person are in [TODO.md](TODO.md).
 
 ## Publishing
 

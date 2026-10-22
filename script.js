@@ -52,6 +52,7 @@
     $('.project-filters').setAttribute('aria-label', t('Filter projects', 'Filtrar proyectos'));
     $('.proof-strip').setAttribute('aria-label', t('Career highlights', 'Logros profesionales'));
     $('.pipeline').setAttribute('aria-label', t('Data to decisions', 'De datos a decisiones'));
+    $('.marta-art').setAttribute('aria-label', t('MARTA Transit Equity', 'Equidad en MARTA'));
     $('.contact-footer > .brand-mark').setAttribute('aria-label', t('Back to top', 'Volver arriba'));
     $('.dialog-close').setAttribute('aria-label', t('Close project', 'Cerrar proyecto'));
     $('.portrait-frame img').alt = t('Pixel-art portrait of Diego in a cap and glasses, with Rio de Janeiro behind him.', 'Retrato de Diego en pixel art con gorra y lentes, con Río de Janeiro al fondo.');
