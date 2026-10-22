@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "server.cjs"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "atlas",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/dgonz/fun-code/world_DG/node_modules/vite/bin/vite.js",
+        "C:/Users/dgonz/fun-code/world_DG",
+        "--port",
+        "5174",
+        "--strictPort"
+      ],
+      "port": 5174
+    }
+  ]
+}
