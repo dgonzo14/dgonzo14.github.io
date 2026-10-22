@@ -34,6 +34,7 @@ You can also open `index.html` directly. The site uses Google Fonts when availab
 | `styles.css` | Design tokens, layout, interaction states, breakpoints, and print/reduced-motion styles |
 | `script.js` | Language, filters, dialogs, navigation, clock, and clipboard enhancement |
 | `server.cjs` | Optional dependency-free local HTTP preview |
+| `_config.yml` | Keeps docs and local helpers out of the GitHub Pages build |
 | `assets/avatar.png` | Original pixel-art portrait |
 | `assets/favicon.svg` | New DG mark |
 | `assets/og.svg` / `assets/og.png` | Editable social-preview source and 1200 × 630 share image |
@@ -55,6 +56,6 @@ The original three source files and original share image are preserved in `.prev
 
 ## Publishing
 
-The redesign is local; no hosting settings were changed. To use GitHub Pages, deploy `index.html`, `styles.css`, `script.js`, and `assets/` at the site root. The current social metadata assumes `https://dgonzo14.github.io/`; update its absolute URLs if using a different domain.
+GitHub Pages publishes the `main` branch of the public [`dgonzo14/dgonzo14.github.io`](https://github.com/dgonzo14/dgonzo14.github.io) repository to `https://dgonzo14.github.io/`, and every push to `main` redeploys. `_config.yml` limits the published site to `index.html`, `styles.css`, `script.js`, and `assets/`; add any new non-site file to its `exclude` list. The social metadata uses absolute `https://dgonzo14.github.io/` URLs; update them if the domain changes.
 
 Keep private repositories private. Project visuals are illustrative diagrams or interface concepts, not production screenshots. No resume PDF or phone number is included.

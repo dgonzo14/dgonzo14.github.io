@@ -1,0 +1,7 @@
+# GitHub Pages publishes only the website: index.html, styles.css, script.js, and assets/.
+# Dot-files and dot-folders are already excluded; these keep the docs and local helpers off the site.
+exclude:
+  - README.md
+  - REDESIGN_PLAN.md
+  - TODO.md
+  - server.cjs
