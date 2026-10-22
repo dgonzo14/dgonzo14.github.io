@@ -58,4 +58,10 @@ The original three source files and original share image are preserved in `.prev
 
 GitHub Pages publishes the `main` branch of the public [`dgonzo14/dgonzo14.github.io`](https://github.com/dgonzo14/dgonzo14.github.io) repository to `https://dgonzo14.github.io/`, and every push to `main` redeploys. `_config.yml` limits the published site to `index.html`, `styles.css`, `script.js`, and `assets/`; add any new non-site file to its `exclude` list. The social metadata uses absolute `https://dgonzo14.github.io/` URLs; update them if the domain changes.
 
+**Released 2026-10-22** at [https://dgonzo14.github.io/](https://dgonzo14.github.io/). Known limitations at release:
+
+- Verified only in Chrome, Edge, and Firefox on Windows (headless) and with emulated phones. Safari, real iOS and Android devices, and a real screen reader have not been tested.
+- Firefox keyboard input could not be tested headless.
+- The LinkedIn link, the email draft, and a rendered link-preview card still need one manual check each. See [TODO.md](TODO.md).
+
 Keep private repositories private. Project visuals are illustrative diagrams or interface concepts, not production screenshots. No resume PDF or phone number is included.

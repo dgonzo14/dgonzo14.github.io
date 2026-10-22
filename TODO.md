@@ -65,17 +65,25 @@ Tested 2026-10-22 on Windows 11 against the local preview, with headless Chrome 
 
 ## 3. Publication
 
-- [ ] **Select the hosting destination and final URL.** Check any existing deployment configuration before choosing the release path.
-  - Findings so far:
-    - This repository has no Git remote.
-    - `https://dgonzo14.github.io/` returns 404 because no `dgonzo14.github.io` repository exists. The public repositories are `dgonzo14`, `DMM-Transportation-Final-Project`, `SHPE_Website`, and `world_DG`.
-    - The current Open Graph URLs only work if the site is published from a repository named `dgonzo14.github.io`. A project repository would serve it at `https://dgonzo14.github.io/<repo>/`, and the metadata would need updating.
-- [ ] **Align metadata with the final URL.** Check the absolute Open Graph URL and image URL, page title, description, favicon, and social-preview image.
-- [ ] **Prepare the release files.** Include `index.html`, `styles.css`, `script.js`, and `assets/`; exclude `.preview/`, local backups, and implementation helpers.
-- [ ] **Publish the redesigned portfolio.** Deploy to the selected hosting destination.
-- [ ] **Smoke-test the published site.** Verify HTTPS, asset loading, navigation, direct project links, filters, dialogs, languages, and contact controls on the live URL.
+- [x] **Select the hosting destination and final URL.** Check any existing deployment configuration before choosing the release path.
+  - The site is a GitHub Pages user site built from `main` of the new public repository [`dgonzo14/dgonzo14.github.io`](https://github.com/dgonzo14/dgonzo14.github.io). It serves at `https://dgonzo14.github.io/`; nothing was hosted there before.
+- [x] **Align metadata with the final URL.** Check the absolute Open Graph URL and image URL, page title, description, favicon, and social-preview image.
+  - The existing absolute URLs already match. On the live site, the title, description, Open Graph tags, favicon, and 1200 × 630 share image are all correct.
+- [x] **Prepare the release files.** Include `index.html`, `styles.css`, `script.js`, and `assets/`; exclude `.preview/`, local backups, and implementation helpers.
+  - `_config.yml` keeps the docs and `server.cjs` out of the Pages build. The live site returns 404 for README, TODO, the plan, `server.cjs`, `_config.yml`, and `.claude/`. The repository itself, including these files, is public.
+- [x] **Publish the redesigned portfolio.** Deploy to the selected hosting destination.
+  - The Pages build of `339e9fa` succeeded on 2026-10-22. HTTPS is enforced, and HTTP redirects to HTTPS.
+- [x] **Smoke-test the published site.** Verify HTTPS, asset loading, navigation, direct project links, filters, dialogs, languages, and contact controls on the live URL.
+  - Live, Chrome 155 passes:
+    - Asset loading, with no console errors.
+    - axe in both languages, at phone width, and with a dialog open.
+    - The keyboard walkthrough, filters, and project dialogs, including the direct `#project-globe` link.
+    - Spanish persistence, the phone menu, reflow at 200% and 400% zoom, reduced motion, and the no-JavaScript fallbacks.
+  - Firefox 158 matches its local results.
+  - The copy-email button was not exercised because headless browsers withhold clipboard access.
 - [ ] **Verify link previews.** Confirm the live share image and metadata are accessible and render correctly in a preview inspector.
-- [ ] **Record the release.** Add the final URL, deployment date, and remaining known limitations to the README.
+  - The tags are present and both the page and the share image return 200 to Facebook's and Twitter's crawlers. **Remaining:** paste the URL into LinkedIn's Post Inspector (or similar) to see the rendered card.
+- [x] **Record the release.** Add the final URL, deployment date, and remaining known limitations to the README.
 
 ## 4. Optional upgrades
 
