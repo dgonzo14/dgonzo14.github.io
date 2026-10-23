@@ -1,4 +1,4 @@
-# Diego Gonzalez · Engineering in motion
+# Diego Gonzalez · Software, ML & data engineer
 
 A bilingual portfolio for software engineering, machine learning, and data systems. Built with plain HTML, CSS, and JavaScript. No build step or package installation.
 
@@ -22,6 +22,7 @@ You can also open `index.html` directly. The site uses Google Fonts when availab
 - Four expandable Delta rotations, education, leadership, teaching, skills, and 29 travel destinations.
 - EN/ES switching with a remembered preference and Spanish browser-language detection.
 - Responsive navigation, active section indicators, email copy feedback, and reduced-motion support.
+- Restrained motion: a headline entrance, scroll reveals, count-up career stats, a plane that follows the Delta rotations, a sticky experience intro, and rolling nav links. With reduced motion or without JavaScript, everything is shown in place.
 - Core content and project disclosures remain available without JavaScript; phones then get plain header links instead of the menu button.
 - The header stops sticking on viewports 480 px tall or less (landscape phones, high zoom).
 

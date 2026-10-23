@@ -45,7 +45,7 @@
     language = next === 'es' ? 'es' : 'en';
     root.lang = language;
     root.dataset.lang = language;
-    document.title = t('Diego Gonzalez — Engineering in motion', 'Diego Gonzalez — Ingeniería en movimiento');
+    document.title = t('Diego Gonzalez — Full Stack Engineer', 'Diego Gonzalez — Ingeniero Full Stack');
     $$('[data-set-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.setLang === language)));
     $('.desktop-nav').setAttribute('aria-label', t('Main navigation', 'Navegación principal'));
     $('.mobile-nav').setAttribute('aria-label', t('Mobile navigation', 'Navegación móvil'));
@@ -152,7 +152,7 @@
     clearTimeout(copyTimer);
     try {
       await navigator.clipboard.writeText(email);
-      status.textContent = t('Copied. Looking forward to connecting!', 'Copiado. ¡Será un gusto conectar!');
+      status.textContent = t('Email address copied.', 'Correo copiado.');
     } catch {
       status.textContent = t('Select the email address above to copy it, or click it to email me.', 'Selecciona el correo de arriba para copiarlo, o haz clic para escribirme.');
     }
@@ -182,6 +182,75 @@
     }, { rootMargin: '-15% 0px -60% 0px', threshold: 0 });
     $$('main > section').forEach(section => observer.observe(section));
   }
+  // Motion is opt-in: without IntersectionObserver or with reduced motion, every element stays in place.
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    const reveal = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
+        entry.target.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 80}ms`);
+        entry.target.classList.add('is-visible');
+        reveal.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    $$('.section-heading, .delta-feature, .featured-project, .index-heading, .project-list, .experience-intro, .rotation, .portrait-column, .about-copy > *, .travel-note, .contact-section h2, .contact-bottom').forEach(element => {
+      element.classList.add('reveal');
+      reveal.observe(element);
+    });
+
+    // Count the career highlights up once; screen readers always get the final number.
+    const counters = $$('.proof-grid strong').map(strong => {
+      const node = [...strong.childNodes].find(child => child.nodeType === Node.TEXT_NODE && /\d/.test(child.textContent));
+      if (!node) return null;
+      const target = Number.parseInt(node.textContent, 10);
+      const shown = document.createElement('span');
+      shown.className = 'count';
+      shown.setAttribute('aria-hidden', 'true');
+      shown.style.minWidth = `${String(target).length}ch`;
+      shown.textContent = '0';
+      const label = document.createElement('span');
+      label.className = 'sr-only';
+      label.textContent = node.textContent;
+      node.replaceWith(shown, label);
+      return { shown, target };
+    }).filter(Boolean);
+    const finishCounts = () => counters.forEach(({ shown, target }) => { shown.textContent = target; });
+    const countObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      countObserver.disconnect();
+      const start = performance.now();
+      const step = now => {
+        const progress = Math.min(1, (now - start) / 1400);
+        counters.forEach(({ shown, target }) => { shown.textContent = Math.round(target * (1 - (1 - progress) ** 3)); });
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.5 });
+    countObserver.observe($('.proof-strip'));
+    window.addEventListener('beforeprint', finishCounts);
+
+    // A plane follows the Delta rotations as the reader scrolls through them.
+    const route = $('.rotation-list');
+    const plane = document.createElement('span');
+    plane.className = 'route-plane';
+    plane.setAttribute('aria-hidden', 'true');
+    plane.innerHTML = '<svg viewBox="-14 -13 28 28"><path d="m0-12 3 9 11 7v3L3 3v7l4 3v2l-7-2-7 2v-2l4-3V3l-11 4V4l11-7z"/></svg>';
+    route.prepend(plane);
+    route.classList.add('has-route');
+    let routeFrame = 0;
+    const updateRoute = () => {
+      routeFrame = 0;
+      const box = route.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (innerHeight * 0.55 - box.top) / box.height));
+      route.style.setProperty('--route', progress.toFixed(4));
+      const planeY = box.top + progress * box.height;
+      $$('.rotation', route).forEach(item => item.classList.toggle('is-reached', item.getBoundingClientRect().top <= planeY + 1));
+    };
+    const queueRoute = () => { if (!routeFrame) routeFrame = requestAnimationFrame(updateRoute); };
+    window.addEventListener('scroll', queueRoute, { passive: true });
+    window.addEventListener('resize', queueRoute);
+    $$('.rotation', route).forEach(item => item.addEventListener('toggle', queueRoute));
+    updateRoute();
+  }
+
   let savedLanguage;
   try { savedLanguage = localStorage.getItem('dg-lang'); } catch { /* Storage may be unavailable. */ }
   setLanguage(savedLanguage || (navigator.language?.startsWith('es') ? 'es' : 'en'));
